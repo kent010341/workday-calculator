@@ -1,0 +1,23 @@
+<div>
+  <mat-form-field>
+    <mat-label>計算式</mat-label>
+    <mat-chip-grid #chipGrid 
+                   cdkDropList
+                   cdkDropListOrientation="horizontal"
+                   (cdkDropListDropped)="drop($event)">
+      <mat-chip-row *ngFor="let chip of chips; let i = index"
+                    [value]="chip"
+                    (removed)="remove(i)"
+                    cdkDrag>
+        {{chip.rawValue}}
+        <button matChipRemove><mat-icon>cancel</mat-icon></button>
+      </mat-chip-row>
+      <input placeholder="輸入工時、運算元或數字"
+             [matChipInputFor]="chipGrid"
+             (matChipInputTokenEnd)="add($event)"
+             (focus)="showWarning = false"
+             (input)="showWarning = false"/>
+    </mat-chip-grid>
+  </mat-form-field>
+  <div class="warning" *ngIf="showWarning">錯誤的格式</div>
+</div>
