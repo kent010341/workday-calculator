@@ -1,5 +1,5 @@
-<div>
-  <mat-form-field>
+<div class="calculator-container">
+  <mat-form-field class="calculator-input">
     <mat-label>計算式</mat-label>
     <mat-chip-grid #chipGrid 
                    cdkDropList
@@ -7,6 +7,7 @@
                    (cdkDropListDropped)="drop($event)">
       <mat-chip-row *ngFor="let chip of chips; let i = index"
                     [value]="chip"
+                    [ngClass]="getChipClass(chip)"
                     (removed)="remove(i)"
                     cdkDrag>
         {{chip.rawValue}}

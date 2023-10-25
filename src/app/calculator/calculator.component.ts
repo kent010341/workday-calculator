@@ -1,6 +1,5 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
 import { MatChipInputEvent } from '@angular/material/chips';
 
 @Component({
@@ -20,7 +19,7 @@ export class CalculatorComponent {
   private readonly NUMBER_PATTERN = /[0-9]+\.*[0-9]*/;
 
   add(event: MatChipInputEvent): void {
-    const value = (event.value || '').replace(' ', '');
+    const value = (event.value || '').replace(/\s+/, '');
 
     let chip: CaculateUnit;
     if (this.WORKDAY_PATTERN.test(value)) {
@@ -44,6 +43,19 @@ export class CalculatorComponent {
 
   drop(event: CdkDragDrop<CaculateUnit[]>) {
     moveItemInArray(this.chips, event.previousIndex, event.currentIndex);
+  }
+
+  getChipClass(chip: CaculateUnit): string {
+    switch (chip.type) {
+      case CaculateUnitType.WORKDAY:
+        return 'workday-chip';
+      case CaculateUnitType.OPERATOR:
+        return 'operator-chip';
+      case CaculateUnitType.NUMBER:
+        return 'number-chip';
+      default:
+        return '';
+    }
   }
 
 }

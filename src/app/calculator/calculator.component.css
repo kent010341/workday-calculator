@@ -1,3 +1,25 @@
+.calculator-container {
+  display: flex;
+  align-items: center;
+  padding: 24px;
+}
+
+.calculator-input {
+  width: 100%;
+}
+
 .warning {
   color: red;
+}
+
+.workday-chip {
+  background-color: #9FA8DA !important;
+}
+
+.operator-chip {
+  background-color: #EF9A9A !important;
+}
+
+.number-chip {
+  background-color: #C5E1A5 !important;
 }
