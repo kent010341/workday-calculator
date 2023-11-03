@@ -24,6 +24,46 @@ export class WorkdayCaculateUnit extends CaculateUnit {
     return 0;
   }
 
+  /**
+   * add another {@link WorkdayCaculateUnit}
+   * 
+   * @param other 
+   * @returns number of minutes
+   */
+  add(other: WorkdayCaculateUnit): number {
+    return this.minute + other.minute;
+  }
+
+  /**
+   * minus another {@link WorkdayCaculateUnit}
+   * 
+   * @param other 
+   * @returns number of minutes
+   */
+  minus(other: WorkdayCaculateUnit): number {
+    return this.minute - other.minute;
+  }
+
+  /**
+   * mulitply another {@link NumberCaculateUnit}
+   * 
+   * @param other 
+   * @returns number of minutes
+   */
+  mulitply(other: NumberCaculateUnit): number {
+    return this.minute * other.value;
+  }
+
+  /**
+   * devided by another {@link NumberCaculateUnit}
+   * 
+   * @param other 
+   * @returns number of minutes
+   */
+  devide(other: NumberCaculateUnit): number {
+    return this.minute / other.value;
+  }
+
 }
 
 /** 運算元計算式單元 */
@@ -52,6 +92,48 @@ export class NumberCaculateUnit extends CaculateUnit {
 
   get value(): number {
     return Number(this.rawValue);
+  }
+
+  
+
+  /**
+   * add another {@link NumberCaculateUnit}
+   * 
+   * @param other 
+   * @returns number
+   */
+  add(other: NumberCaculateUnit): number {
+    throw new Error('Not yet implemented.');
+  }
+
+  /**
+   * minus another {@link NumberCaculateUnit}
+   * 
+   * @param other 
+   * @returns number
+   */
+  minus(other: NumberCaculateUnit): number {
+    throw new Error('Not yet implemented.');
+  }
+
+  /**
+   * mulitply another {@link WorkdayCaculateUnit}
+   * 
+   * @param other 
+   * @returns number of minutes
+   */
+  mulitply(other: WorkdayCaculateUnit): number {
+    return this.value * other.minute;
+  }
+
+  /**
+   * devided by another {@link WorkdayCaculateUnit}
+   * 
+   * @param other 
+   * @returns number of minutes
+   */
+  devide(other: WorkdayCaculateUnit): number {
+    return this.value / other.minute;
   }
 
 }
