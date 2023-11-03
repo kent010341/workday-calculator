@@ -2,6 +2,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, OnDestroy } from '@angular/core';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { Observable, Subject, every, filter, from, map, of, pairwise, switchMap, takeUntil } from 'rxjs';
+import { CaculateUnit, CaculateUnitType, NumberCaculateUnit, OperatorCaculateUnit, WorkdayCaculateUnit }  from 'src/app/model';
 
 @Component({
   selector: 'app-calculator',
@@ -110,7 +111,7 @@ export class CalculatorComponent implements OnDestroy {
         if (curr.type === CaculateUnitType.OPERATOR) {
           return prev.type !== CaculateUnitType.OPERATOR && next.type !== CaculateUnitType.OPERATOR;
         } else {
-          return false;
+          return true;
         }
       }),
       every(isValid => isValid),
@@ -121,76 +122,5 @@ export class CalculatorComponent implements OnDestroy {
     // TODO 實作計算邏輯
     return of(this.chips.map(c => c.rawValue).join(','));
   }
-
-}
-
-/**
- * 計算式單元
- */
-class CaculateUnit {
-  
-  constructor(
-    public readonly rawValue: string,
-    public readonly type: CaculateUnitType,
-  ) {}
-
-}
-
-/** 工時計算式單元 */
-class WorkdayCaculateUnit extends CaculateUnit {
-
-  constructor(
-    public override readonly rawValue: string,
-  ) {
-    super(rawValue, CaculateUnitType.WORKDAY);
-  }
-
-  get minute(): number {
-    // TODO: 運算邏輯
-    return 0;
-  }
-
-}
-
-/** 運算元計算式單元 */
-class OperatorCaculateUnit extends CaculateUnit {
-
-  constructor(
-    public override readonly rawValue: string,
-  ) {
-    super(rawValue, CaculateUnitType.OPERATOR);
-  }
-
-  get value(): string {
-    return this.rawValue;
-  }
-
-}
-
-/** 運算元計算式單元 */
-class NumberCaculateUnit extends CaculateUnit {
-
-  constructor(
-    public override readonly rawValue: string,
-  ) {
-    super(rawValue, CaculateUnitType.NUMBER);
-  }
-
-  get value(): number {
-    return Number(this.rawValue);
-  }
-
-}
-
-enum CaculateUnitType {
-
-  /** 工時格式 */
-  WORKDAY = 'WORKDAY',
-
-  /** 運算元 */
-  OPERATOR = 'OPERATOR',
-
-  /** 數字 */
-  NUMBER = 'NUMBER',
 
 }
