@@ -1,4 +1,5 @@
 <div class="calculator-container column">
+  <!-- TODO: clear btn -->
   <mat-form-field class="calculator-input">
     <mat-label>計算式</mat-label>
     <mat-chip-grid #chipGrid 
@@ -22,6 +23,7 @@
   </mat-form-field>
   <div class="warning" *ngIf="showWarning">錯誤的格式</div>
   <div class="result">
+    <!-- TODO: result can be add as a chip -->
     結果：{{result}}
   </div>
 </div>
