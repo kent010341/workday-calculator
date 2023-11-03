@@ -138,6 +138,14 @@ export class NumberCaculateUnit extends CaculateUnit {
 
 }
 
+/** work day format */
+interface Workday {
+  week: number,
+  day: number,
+  hour: number,
+  minute: number,
+}
+
 export enum CaculateUnitType {
 
   /** 工時格式 */
